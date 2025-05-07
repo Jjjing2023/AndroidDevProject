@@ -1,6 +1,8 @@
 package edu.northeastern.numad25sum_tianjingliu;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +23,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void showInformation(View view){
+
+        CharSequence text = "name: Tianjing Liu\nemail: liu.tianj@northeastern.edu";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+        toast.show();
+
+    }
+
+
 }
