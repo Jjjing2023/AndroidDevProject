@@ -1,7 +1,6 @@
 package edu.northeastern.numad25sum_tianjingliu;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -109,9 +108,6 @@ public class QuicCalc extends AppCompatActivity {
     }
 
     private int evaluateExpression(String expression){
-        // Handle negative numbers
-//        expression = expression.replaceAll("--", "+");
-
         // Handle leading negative numbers
         if (expression.startsWith("-")) {
             expression = "0" + expression;
@@ -119,7 +115,6 @@ public class QuicCalc extends AppCompatActivity {
 
         // split into numbers and operators
         String[] numbers = expression.split("[+-]");
-//        String[] operators = expression.split("[0-9.]+");
         String[] operators = expression.split("[0-9]+");
 
         if(numbers.length == 0) return 0;

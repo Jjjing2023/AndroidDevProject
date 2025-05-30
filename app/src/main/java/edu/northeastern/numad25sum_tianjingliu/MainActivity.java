@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
     private Button quicCalc;
+    private Button linkCollector;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        linkCollector = findViewById(R.id.link);
+        linkCollector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LinkCollector.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
