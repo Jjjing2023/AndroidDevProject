@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,10 @@ public class LinkCollector extends AppCompatActivity {
 
         linkRecyclerView = findViewById(R.id.link_recyclerView);
         linkRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        LinkViewModel linkViewModel = new ViewModelProvider(this).get(LinkViewModel.class);
+        links = linkViewModel.getLinks();
+
         linkAdapter = new LinkAdapter(links, this);
         linkRecyclerView.setAdapter(linkAdapter);
 
