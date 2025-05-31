@@ -35,6 +35,14 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkViewHolder> {
         holder.name.setText(currentItem.getName());
         holder.url.setText(currentItem.getUrl());
 
+        //make the url item clickable
+        holder.url.setOnClickListener(view->{
+            String url = currentItem.getUrl();
+
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            context.startActivity(browserIntent);
+        });
+
     }
 
     @Override
