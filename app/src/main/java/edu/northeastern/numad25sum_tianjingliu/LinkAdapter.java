@@ -41,6 +41,11 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkViewHolder> {
         holder.url.setOnClickListener(view->{
             String url = currentItem.getUrl();
 
+            // url handler
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "http://" + url;
+            }
+
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             context.startActivity(browserIntent);
         });

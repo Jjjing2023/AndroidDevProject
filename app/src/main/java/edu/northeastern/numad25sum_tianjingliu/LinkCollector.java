@@ -56,6 +56,9 @@ public class LinkCollector extends AppCompatActivity {
 
         dialogBuilder.setTitle("Add New Link");
         dialogBuilder.setPositiveButton("Add", (dialog, which) -> {
+            //handling url
+
+
             String name = editName.getText().toString();
             String url = editUrl.getText().toString();
 
