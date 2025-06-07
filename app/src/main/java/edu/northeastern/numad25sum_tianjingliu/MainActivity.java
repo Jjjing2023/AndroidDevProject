@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Button quicCalc;
     private Button linkCollector;
+    private Button primeDirective;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LinkCollector.class);
+                startActivity(intent);
+            }
+        });
+
+        primeDirective=findViewById(R.id.prime);
+        primeDirective.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PrimeDirective.class);
                 startActivity(intent);
             }
         });

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.NUMAD25Sum_TianjingLiu"
         tools:targetApi="31">
         <activity
+            android:name=".PrimeDirective"
+            android:exported="false" />
+        <activity
             android:name=".LinkCollector"
             android:exported="false" />
         <activity
