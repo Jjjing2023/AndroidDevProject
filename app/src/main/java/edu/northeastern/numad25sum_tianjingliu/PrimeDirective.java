@@ -1,6 +1,7 @@
 package edu.northeastern.numad25sum_tianjingliu;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,9 +12,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PrimeDirective extends AppCompatActivity {
+    private static final String TAG = "PrimeDirective";
     private TextView currentText;
     private TextView latestText;
     private volatile boolean isSearching = false;
+    private int currentNumber = 3;
     private Thread workerThread;
 
     @Override
@@ -29,11 +32,13 @@ public class PrimeDirective extends AppCompatActivity {
     public void findPrimesClick(View view) {
         if (isSearching) return;
         isSearching = true;
+        currentNumber = 3;
 
         workerThread= new Thread(new Runnable() {
             @Override
             public void run() {
-                int i = 3;
+                int i = currentNumber;
+                Log.d("PrimeDirective", "Starting search at: " + currentNumber);
                 while(isSearching){
                     if(i%100 == 3){
                         final int current = i;
@@ -42,7 +47,6 @@ public class PrimeDirective extends AppCompatActivity {
 
                     if(isPrime(i)){
                         final int prime = i;
-
                         runOnUiThread(()->latestText.setText("Latest Prime: "+prime));
                     }
                     i+=2;
