@@ -3,9 +3,11 @@ package edu.northeastern.numad25sum_tianjingliu;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,17 +24,21 @@ public class PrimeDirective extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.prime_directive);
+
         currentText = findViewById(R.id.current);
         latestText = findViewById(R.id.latest);
-
     }
 
     public void findPrimesClick(View view) {
+        // avoid situations when users keep clicking while searching
         if (isSearching) return;
         isSearching = true;
-        currentNumber = 3;
+
+        // only start from 3 if user manually start searching again
+        if (view != null){
+            currentNumber = 3;
+        }
 
         workerThread= new Thread(new Runnable() {
             @Override
@@ -50,6 +56,7 @@ public class PrimeDirective extends AppCompatActivity {
                         runOnUiThread(()->latestText.setText("Latest Prime: "+prime));
                     }
                     i+=2;
+                    currentNumber = i;
                 }
                 runOnUiThread(() -> currentText.setText("Search stopped"));
             }
@@ -65,6 +72,31 @@ public class PrimeDirective extends AppCompatActivity {
             if(number%i==0)return false;
         }
         return true;
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        CheckBox pacifier = findViewById(R.id.switcher);
+        outState.putBoolean("pacifier_checked", pacifier.isChecked());
+        outState.putBoolean("searching", isSearching);
+        outState.putInt("current_number", currentNumber);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+
+        CheckBox pacifier = findViewById(R.id.switcher);
+        pacifier.setChecked(savedInstanceState.getBoolean("pacifier_checked", false));
+
+        currentNumber = savedInstanceState.getInt("current_number", currentNumber);
+
+        if(savedInstanceState.getBoolean("searching", false)){
+            findPrimesClick(null);
+        }
     }
 
 }
