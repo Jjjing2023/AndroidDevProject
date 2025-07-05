@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Button quicCalc;
     private Button linkCollector;
     private Button primeDirective;
+    private Button locatoin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        locatoin = findViewById(R.id.location);
+        locatoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, location.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

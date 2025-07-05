@@ -40,26 +40,23 @@ public class PrimeDirective extends AppCompatActivity {
             currentNumber = 3;
         }
 
-        workerThread= new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int i = currentNumber;
-                Log.d("PrimeDirective", "Starting search at: " + currentNumber);
-                while(isSearching){
-                    if(i%100 == 3){
-                        final int current = i;
-                        runOnUiThread(()->currentText.setText("Checking: " + current));
-                    }
-
-                    if(isPrime(i)){
-                        final int prime = i;
-                        runOnUiThread(()->latestText.setText("Latest Prime: "+prime));
-                    }
-                    i+=2;
-                    currentNumber = i;
+        workerThread= new Thread(() -> {
+            int i = currentNumber;
+            Log.d("PrimeDirective", "Starting search at: " + currentNumber);
+            while(isSearching){
+                if(i%100 == 3){
+                    final int current = i;
+                    runOnUiThread(()->currentText.setText("Checking: " + current));
                 }
-                runOnUiThread(() -> currentText.setText("Search stopped"));
+
+                if(isPrime(i)){
+                    final int prime = i;
+                    runOnUiThread(()->latestText.setText("Latest Prime: "+prime));
+                }
+                i+=2;
+                currentNumber = i;
             }
+            runOnUiThread(() -> currentText.setText("Search stopped"));
         });
         workerThread.start();
 
